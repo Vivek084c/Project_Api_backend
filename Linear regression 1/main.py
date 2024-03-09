@@ -4,13 +4,14 @@ from fastapi import FastAPI
 import numpy as np
 import pandas as pd
 import pickle
-from auth import modelauth
+from regModel import regression
+
 
 
 #creating the app object from fastapi
 app=FastAPI()
-pickle_in=open("model.pkl","rb")
-regression=pickle.load(pickle_in)
+# pickle_in=open("model.pkl","rb")
+# regression=pickle.load(pickle_in)
 
 #setting up the routes
 @app.get("/")
@@ -23,7 +24,7 @@ def testRoute(name:str):
 
 #route to pridict the output
 @app.post("/pridict")
-def pridict_output(data:modelauth):
+def pridict_output(data):
     return {"value is ":regression.predict([[5]])}
 
 #running the app
